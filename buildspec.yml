@@ -1,0 +1,63 @@
+version: 0.2
+
+#env:
+  #variables:
+     # key: "value"
+     # key: "value"
+  #parameter-store:
+     # key: "value"
+     # key: "value"
+  #secrets-manager:
+     # key: secret-id:json-key:version-stage:version-id
+     # key: secret-id:json-key:version-stage:version-id
+  #exported-variables:
+     # - variable
+     # - variable
+  #git-credential-helper: yes
+#batch:
+  #fast-fail: true
+  #build-list:
+  #build-matrix:
+  #build-graph:
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+      # name: version
+    #commands:
+      # - command
+      # - command
+  pre_build:
+    commands:
+      - pip install -r requirements.txt
+      # - command
+  build:
+    commands:
+       - cd flaskdemo/
+       - docker build -t flaskdemo .
+       - docker tag flaskdemo teju003/flaskdemo
+       - docker login -u teju003 -p LearnDocker@123
+       - docker push teju003/flaskdemo
+      # - command
+  post_build:
+    commands:
+      - echo "Build Successfull"
+      # - command
+#reports:
+  #report-name-or-arn:
+    #files:
+      # - location
+      # - location
+    #base-directory: location
+    #discard-paths: yes
+    #file-format: JunitXml | CucumberJson
+#artifacts:
+  #files:
+    # - location
+    # - location
+  #name: $(date +%Y-%m-%d)
+  #discard-paths: yes
+  #base-directory: location
+#cache:
+  #paths:
+    # - paths
